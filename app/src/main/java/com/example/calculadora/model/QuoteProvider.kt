@@ -4,7 +4,7 @@ class QuoteProvider {
     companion object{
 
         fun random(): QuoteModel {
-            val position:Int = (0..10).random()
+            val position:Int = (0..9).random()
             return quote[position]
         }
 
@@ -43,7 +43,6 @@ class QuoteProvider {
                 quote = "Software and cathedrals are much the same — first we build them, then we pray.",
                 author = "Anonymous"
             ),
-            QuoteModel(quote = "¿A que esperas?, suscríbete.", author = "AristiDevs")
         )
     }
 }
