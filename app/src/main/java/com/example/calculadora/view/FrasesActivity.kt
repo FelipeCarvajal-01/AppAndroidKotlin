@@ -1,6 +1,8 @@
 package com.example.calculadora.view
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +21,10 @@ class FrasesActivity : AppCompatActivity() {
         binding = ActivityFrasesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.buttonHome.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+
         quoteViewModel.quoteModel.observe(this, Observer {
             binding.tvQuote.text = it.quote
             binding.tvAuthor.text = it.author
@@ -26,4 +32,5 @@ class FrasesActivity : AppCompatActivity() {
 
         binding.viewContainer.setOnClickListener { quoteViewModel.randomQuote() }
     }
+
 }

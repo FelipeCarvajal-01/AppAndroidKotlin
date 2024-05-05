@@ -1,31 +1,34 @@
-package com.example.calculadora
+package com.example.calculadora.view
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.calculadora.R
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-class MainActivity : AppCompatActivity() {
-
+class CalculadoraActivity : AppCompatActivity() {
     //Inicializar componentes de vista
 
     //Button
-    lateinit var tvUno:Button
-    lateinit var tvDos:Button
-    lateinit var tvTres:Button
-    lateinit var tvCuatro:Button
-    lateinit var tvCinco:Button
-    lateinit var tvSeis:Button
-    lateinit var tvSiete:Button
-    lateinit var tvOcho:Button
-    lateinit var tvNueve:Button
-    lateinit var tvCero:Button
+    lateinit var tvUno: Button
+    lateinit var tvDos: Button
+    lateinit var tvTres: Button
+    lateinit var tvCuatro: Button
+    lateinit var tvCinco: Button
+    lateinit var tvSeis: Button
+    lateinit var tvSiete: Button
+    lateinit var tvOcho: Button
+    lateinit var tvNueve: Button
+    lateinit var tvCero: Button
 
     // Buttons Operadores matemáticos
     lateinit var sum: Button
@@ -40,10 +43,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var igual: Button
     lateinit var borrar: Button
     lateinit var punto: Button
+    lateinit var home: Button
 
     // TextView
-    lateinit var txt_nunUno: TextView
-    lateinit var txt_nunDos: TextView
     lateinit var tvResult: TextView
 
     // Variables que almacenan
@@ -51,17 +53,16 @@ class MainActivity : AppCompatActivity() {
     var numr1:Double = 0.0
     var numr2:Double = 0.0
     var resul:Double = 0.0
-
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_calculadora)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         // Buttons Numeros
         tvUno = findViewById(R.id.bt_1)
         tvDos = findViewById(R.id.bt_2)
@@ -91,11 +92,13 @@ class MainActivity : AppCompatActivity() {
         // TxtView de Resultado
         tvResult = findViewById(R.id.txt_resultado)
 
+        // ImageView
+        home = findViewById(R.id.button_home)
+
         // Llamar Funciones
         buttonsNums()
         buttonsAction()
         operations()
-
     }
 
     private fun buttonsNums(){
@@ -153,6 +156,9 @@ class MainActivity : AppCompatActivity() {
             }else{
                 tvResult.setText(tvResult.getText().toString() + ".") // Obtiene el texto actual del TextView, agrega "." y lo establece como el nuevo texto del TextView
             }
+        }
+        home.setOnClickListener{
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
@@ -285,14 +291,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun divisio(a: Double, b: Double): Double {
-        return if (b > 0.0) {
-             a / b
+        return if (b == 0.0) {
+            a / b
         } else {
             println("Error: El divisor no puede ser cero.")
             Double.NaN
         }
     }
-
-
-
 }
