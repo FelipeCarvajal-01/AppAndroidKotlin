@@ -1,6 +1,6 @@
 package com.example.calculadora.domain
 
-import com.example.calculadora.data.QuoteRepository
+import com.example.calculadora.data.repositories.QuoteRepository
 import com.example.calculadora.data.model.QuoteModel
 
 class GetQuotesUseCase {

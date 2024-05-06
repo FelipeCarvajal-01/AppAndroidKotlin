@@ -1,4 +1,4 @@
-package com.example.calculadora.data
+package com.example.calculadora.data.repositories
 
 import com.example.calculadora.data.model.QuoteModel
 import com.example.calculadora.data.model.QuoteProvider

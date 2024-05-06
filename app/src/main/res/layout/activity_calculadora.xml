@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@color/black"
     tools:context=".ui.view.MainActivity">
 
     <Button
@@ -21,7 +22,7 @@
         android:id="@+id/txt_resultado"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="30dp"
         android:gravity="center_vertical|end"
         android:layout_marginLeft="20dp"

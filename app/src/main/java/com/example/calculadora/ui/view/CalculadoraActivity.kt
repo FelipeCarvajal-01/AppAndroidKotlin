@@ -262,10 +262,11 @@ class CalculadoraActivity : AppCompatActivity() {
                 else ->  Toast.makeText(this, "Por favor ingresa valores en todos los campos", Toast.LENGTH_SHORT).show()
             }
             if (!resul.isNaN()){
-                Toast.makeText(this, "No puedes dividir en 0", Toast.LENGTH_SHORT).show()
+                tvResult.setText(resul.toString())
             }else{
                 // Establece el resultado de la operación como el texto del TextView tvResult
-                tvResult.setText(resul.toString())
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+
             }
 
         }
@@ -290,10 +291,10 @@ class CalculadoraActivity : AppCompatActivity() {
     }
 
     private fun divisio(a: Double, b: Double): Double {
-        return if (b == 0.0) {
+        return if (b > 0.0) {
             a / b
         } else {
-            println("Error: El divisor no puede ser cero.")
+            Toast.makeText(this, "Error: El divisor no puede ser cero.", Toast.LENGTH_SHORT).show()
             Double.NaN
         }
     }
