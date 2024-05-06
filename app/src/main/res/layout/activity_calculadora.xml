@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".view.MainActivity">
+    tools:context=".ui.view.MainActivity">
 
     <Button
         android:id="@+id/button_home"

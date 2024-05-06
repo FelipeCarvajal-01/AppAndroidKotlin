@@ -1,4 +1,4 @@
-package com.example.calculadora.view
+package com.example.calculadora.ui.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
