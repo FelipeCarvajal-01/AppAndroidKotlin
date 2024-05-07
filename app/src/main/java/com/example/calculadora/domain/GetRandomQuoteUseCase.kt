@@ -5,7 +5,7 @@ import com.example.calculadora.data.model.QuoteProvider
 
 class GetRandomQuoteUseCase {
     operator fun invoke(): QuoteModel?{
-        val quotes = QuoteProvider.quotes
+        val quotes:List<QuoteModel> = QuoteProvider.quotes
         if(!quotes.isNullOrEmpty()){
             val randomNumber = (quotes.indices).random()
             return quotes[randomNumber]

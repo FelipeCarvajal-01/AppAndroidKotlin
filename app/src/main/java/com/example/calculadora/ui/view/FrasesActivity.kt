@@ -31,6 +31,7 @@ class FrasesActivity : AppCompatActivity() {
             binding.tvQuote.text = it.quote
             binding.tvAuthor.text = it.author
         })
+
         quoteViewModel.isLoading.observe(this, Observer {
             binding.loading.isVisible = it
         })

@@ -14,14 +14,15 @@ class QuoteViewModel:ViewModel() {
     var getQuotesUseCase = GetQuotesUseCase()
     val isLoading = MutableLiveData<Boolean>()
     var getRandomQuoteUseCase = GetRandomQuoteUseCase()
+
     fun OnCreate(){
         viewModelScope.launch {
             isLoading.postValue(true)
             val result = getQuotesUseCase()
 
             if(!result.isNullOrEmpty()){
-                quoteModel.postValue(result[0])
                 isLoading.postValue(false)
+                quoteModel.postValue(result[0])
             }
         }
     }
