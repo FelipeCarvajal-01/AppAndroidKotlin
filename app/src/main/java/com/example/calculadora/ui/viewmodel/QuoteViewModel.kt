@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.calculadora.data.model.QuoteModel
-import com.example.calculadora.data.model.QuoteProvider
 import com.example.calculadora.domain.GetQuotesUseCase
 import com.example.calculadora.domain.GetRandomQuoteUseCase
 import kotlinx.coroutines.launch
