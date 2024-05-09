@@ -1,5 +1,7 @@
-package com.example.calculadora
+package com.example.calculadora.ui.view
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -8,24 +10,24 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.calculadora.R
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-class MainActivity : AppCompatActivity() {
-
+class CalculadoraActivity : AppCompatActivity() {
     //Inicializar componentes de vista
 
     //Button
-    lateinit var tvUno:Button
-    lateinit var tvDos:Button
-    lateinit var tvTres:Button
-    lateinit var tvCuatro:Button
-    lateinit var tvCinco:Button
-    lateinit var tvSeis:Button
-    lateinit var tvSiete:Button
-    lateinit var tvOcho:Button
-    lateinit var tvNueve:Button
-    lateinit var tvCero:Button
+    lateinit var tvUno: Button
+    lateinit var tvDos: Button
+    lateinit var tvTres: Button
+    lateinit var tvCuatro: Button
+    lateinit var tvCinco: Button
+    lateinit var tvSeis: Button
+    lateinit var tvSiete: Button
+    lateinit var tvOcho: Button
+    lateinit var tvNueve: Button
+    lateinit var tvCero: Button
 
     // Buttons Operadores matemáticos
     lateinit var sum: Button
@@ -40,10 +42,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var igual: Button
     lateinit var borrar: Button
     lateinit var punto: Button
+    lateinit var home: Button
 
     // TextView
-    lateinit var txt_nunUno: TextView
-    lateinit var txt_nunDos: TextView
     lateinit var tvResult: TextView
 
     // Variables que almacenan
@@ -51,17 +52,16 @@ class MainActivity : AppCompatActivity() {
     var numr1:Double = 0.0
     var numr2:Double = 0.0
     var resul:Double = 0.0
-
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_calculadora)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         // Buttons Numeros
         tvUno = findViewById(R.id.bt_1)
         tvDos = findViewById(R.id.bt_2)
@@ -91,11 +91,13 @@ class MainActivity : AppCompatActivity() {
         // TxtView de Resultado
         tvResult = findViewById(R.id.txt_resultado)
 
+        // ImageView
+        home = findViewById(R.id.button_home)
+
         // Llamar Funciones
         buttonsNums()
         buttonsAction()
         operations()
-
     }
 
     private fun buttonsNums(){
@@ -153,6 +155,9 @@ class MainActivity : AppCompatActivity() {
             }else{
                 tvResult.setText(tvResult.getText().toString() + ".") // Obtiene el texto actual del TextView, agrega "." y lo establece como el nuevo texto del TextView
             }
+        }
+        home.setOnClickListener{
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
@@ -257,10 +262,11 @@ class MainActivity : AppCompatActivity() {
                 else ->  Toast.makeText(this, "Por favor ingresa valores en todos los campos", Toast.LENGTH_SHORT).show()
             }
             if (!resul.isNaN()){
-                Toast.makeText(this, "No puedes dividir en 0", Toast.LENGTH_SHORT).show()
+                tvResult.setText(resul.toString())
             }else{
                 // Establece el resultado de la operación como el texto del TextView tvResult
-                tvResult.setText(resul.toString())
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+
             }
 
         }
@@ -286,13 +292,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun divisio(a: Double, b: Double): Double {
         return if (b > 0.0) {
-             a / b
+            a / b
         } else {
-            println("Error: El divisor no puede ser cero.")
+            Toast.makeText(this, "Error: El divisor no puede ser cero.", Toast.LENGTH_SHORT).show()
             Double.NaN
         }
     }
-
-
-
 }
