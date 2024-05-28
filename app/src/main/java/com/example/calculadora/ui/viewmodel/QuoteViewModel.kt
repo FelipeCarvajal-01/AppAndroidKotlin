@@ -13,17 +13,15 @@ import javax.inject.Inject
 @HiltViewModel
 class QuoteViewModel @Inject constructor(
     private val getQuotesUseCase:GetQuotesUseCase,
-    private val getRandomQuoteUseCase:GetRandomQuoteUseCase
+    private val  getRandomQuoteUseCase:GetRandomQuoteUseCase
 ):ViewModel() {
+
     val quoteModel = MutableLiveData<QuoteModel?>()
-    // Para mostrar el loading de carga
     val isLoading = MutableLiveData<Boolean>()
-
     fun onCreate() {
+        isLoading.postValue(true)
         viewModelScope.launch {
-            isLoading.postValue(true)
-            val result:List<QuoteModel>? = getQuotesUseCase()
-
+            val  result:List<QuoteModel>? = getQuotesUseCase()
             if (!result.isNullOrEmpty()){
                 isLoading.postValue(false)
                 quoteModel.postValue(result[0])
@@ -31,12 +29,14 @@ class QuoteViewModel @Inject constructor(
         }
     }
 
-    fun randomQuote(){
+    fun randomQuote() {
         isLoading.postValue(true)
         val quote = getRandomQuoteUseCase()
-        if (quote != null){
+
+        if (quote!=null){
             quoteModel.postValue(quote)
         }
         isLoading.postValue(false)
     }
+
 }

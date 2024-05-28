@@ -1,5 +1,6 @@
 package com.example.calculadora.core.di
 
+import com.example.calculadora.data.network.clients.QuoteApiClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,5 +20,10 @@ object NetworkModule {
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+    @Singleton
+    @Provides
+    fun provideQuoteApiClient(retrofit: Retrofit):QuoteApiClient{
+        return retrofit.create(QuoteApiClient::class.java)
     }
 }
