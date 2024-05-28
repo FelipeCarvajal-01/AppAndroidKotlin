@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import com.example.calculadora.data.utils.SharedApp
 import com.example.calculadora.databinding.ActivityFrasesBinding
 import com.example.calculadora.ui.viewmodel.QuoteViewModel
 
@@ -21,15 +22,15 @@ class FrasesActivity : AppCompatActivity() {
         binding = ActivityFrasesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        quoteViewModel.OnCreate()
+        quoteViewModel.onCreate()
 
         binding.buttonHome.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
         quoteViewModel.quoteModel.observe(this, Observer {
-            binding.tvQuote.text = it.quote
-            binding.tvAuthor.text = it.author
+            binding.tvQuote.text  = it?.quote
+            binding.tvAuthor.text = it?.author
         })
 
         quoteViewModel.isLoading.observe(this, Observer {
@@ -37,6 +38,10 @@ class FrasesActivity : AppCompatActivity() {
         })
 
         binding.viewContainer.setOnClickListener { quoteViewModel.randomQuote() }
+
+        val nombre = SharedApp.prefs.name
+
+        binding.tvNameAuth.text = nombre
     }
 
 }

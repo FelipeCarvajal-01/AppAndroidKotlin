@@ -7,29 +7,34 @@ import com.example.calculadora.data.model.QuoteModel
 import com.example.calculadora.domain.GetQuotesUseCase
 import com.example.calculadora.domain.GetRandomQuoteUseCase
 import kotlinx.coroutines.launch
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class QuoteViewModel:ViewModel() {
-    val quoteModel = MutableLiveData<QuoteModel>()
-    var getQuotesUseCase = GetQuotesUseCase()
+@HiltViewModel
+class QuoteViewModel @Inject constructor(
+    private val getQuotesUseCase:GetQuotesUseCase,
+    private val getRandomQuoteUseCase:GetRandomQuoteUseCase
+):ViewModel() {
+    val quoteModel = MutableLiveData<QuoteModel?>()
+    // Para mostrar el loading de carga
     val isLoading = MutableLiveData<Boolean>()
-    var getRandomQuoteUseCase = GetRandomQuoteUseCase()
 
-    fun OnCreate(){
+    fun onCreate() {
         viewModelScope.launch {
             isLoading.postValue(true)
-            val result = getQuotesUseCase()
+            val result:List<QuoteModel>? = getQuotesUseCase()
 
-            if(!result.isNullOrEmpty()){
+            if (!result.isNullOrEmpty()){
                 isLoading.postValue(false)
                 quoteModel.postValue(result[0])
             }
         }
     }
 
-    fun randomQuote() {
+    fun randomQuote(){
         isLoading.postValue(true)
         val quote = getRandomQuoteUseCase()
-        if(quote!=null){
+        if (quote != null){
             quoteModel.postValue(quote)
         }
         isLoading.postValue(false)
