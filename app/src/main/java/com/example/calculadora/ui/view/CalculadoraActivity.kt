@@ -92,7 +92,7 @@ class CalculadoraActivity : AppCompatActivity() {
         tvResult = findViewById(R.id.txt_resultado)
 
         // ImageView
-        home = findViewById(R.id.button_home)
+        home = findViewById(R.id.buttonHome)
 
         // Llamar Funciones
         buttonsNums()

@@ -1,4 +1,4 @@
-package com.example.calculadora.data.network
+package com.example.calculadora.data.network.clients
 
 import com.example.calculadora.data.model.QuoteModel
 import retrofit2.Response

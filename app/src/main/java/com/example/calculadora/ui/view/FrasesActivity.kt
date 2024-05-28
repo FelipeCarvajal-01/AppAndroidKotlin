@@ -9,6 +9,9 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.example.calculadora.databinding.ActivityFrasesBinding
 import com.example.calculadora.ui.viewmodel.QuoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
 
 class FrasesActivity : AppCompatActivity() {
 
@@ -21,15 +24,15 @@ class FrasesActivity : AppCompatActivity() {
         binding = ActivityFrasesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        quoteViewModel.OnCreate()
+        quoteViewModel.onCreate()
 
         binding.buttonHome.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
         quoteViewModel.quoteModel.observe(this, Observer {
-            binding.tvQuote.text = it.quote
-            binding.tvAuthor.text = it.author
+            binding.tvQuote.text  = it?.quote
+            binding.tvAuthor.text = it?.author
         })
 
         quoteViewModel.isLoading.observe(this, Observer {
@@ -37,6 +40,8 @@ class FrasesActivity : AppCompatActivity() {
         })
 
         binding.viewContainer.setOnClickListener { quoteViewModel.randomQuote() }
+
+
     }
 
 }

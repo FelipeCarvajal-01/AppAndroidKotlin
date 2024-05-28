@@ -9,6 +9,14 @@
     android:background="@color/black"
     tools:context=".ui.view.MainActivity">
 
+    <TextView
+        android:id="@+id/tvUno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +32,15 @@
         android:id="@+id/button_quote"
         android:textSize="25dp"
         android:text="FRASES"
-        android:backgroundTint="#00BCD4"/>
+        android:backgroundTint="#00BCD4"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_prefs"
+        android:textSize="25dp"
+        android:text="SHARED PREFERENCES"
+        android:backgroundTint="#00BCD4" />
 
 </LinearLayout>
